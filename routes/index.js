@@ -31,5 +31,8 @@ router.get('/faqs', function(req, res, next) {
 router.get('/privacy', function(req, res, next) {
   res.render('privacy');
 });
+router.get('/single', function(req, res, next) {
+  res.render('single');
+});
 
 module.exports = router;
