@@ -39,7 +39,7 @@ router.get('/single', function(req, res, next) {
   res.render('single');
 });
 router.get("/custome", function(req, res, next){
-  if(!req.session.user)
+  if(req.session.user)
   {
 
 	  res.render('custome');
