@@ -41,12 +41,18 @@ router.get('/single', function(req, res, next) {
 router.get("/custome", function(req, res, next){
   if(req.session.user)
   {
+    console.log(req.session.user);
+	  res.render('custome',
+              { 
+                useremail: 'airrakesh@hotmail.com'
+              }
+              );
 
-	  res.render('custome');
   }
   else
   {
     res.send("<html><script>alert('please login First'); location.href='index';</script></html>");
+    
   }
 
 })
@@ -107,7 +113,7 @@ router.post("/userlogin", function(req, res){
     }
     else
     {
-      delete doc.password;
+      delete doc.userpasswrod;
       req.session.user = doc;
 
       res.send("<html><script>alert('You are signed in ');location.href='index';</script></html>");
