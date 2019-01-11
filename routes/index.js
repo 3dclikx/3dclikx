@@ -36,14 +36,24 @@ router.get('/privacy', function(req, res, next) {
   res.render('privacy');
 });
 router.get('/single', function(req, res, next) {
-  res.render('single');
+  if(req.session.user)
+  {
+    console.log(req.session.user);
+    res.render('si',{ useremail : 'airrakesh@hotmail.com'});
+
+  }
+  else
+  {
+    res.render('single');
+  }
+  
 });
 router.get("/custome", function(req, res, next){
   if(req.session.user)
   {
     console.log(req.session.user);
-	  res.render('custome',{ useremail : 'airrakesh@hotmail.com'});
-
+	  return res.render('custome',{ user : req.session.user, error:req.session.error, success:req.session.success });
+    req.session.error = null;
   }
   else
   {
@@ -105,13 +115,16 @@ router.post("/userlogin", function(req, res){
   }
   clikx.findOne(data, function(err, doc){
     if(!doc){
+      var error = err
+      req.session.error = error;
+      req.session.success = false;
       res.send("<html><script>alert('Email or password is wrong'); location.href='index';</script></html>");
     }
     else
     {
       delete doc.userpasswrod;
       req.session.user = doc;
-
+      req.session.success = true;
       res.send("<html><script>alert('You are signed in ');location.href='index';</script></html>");
     }
   });
@@ -119,7 +132,12 @@ router.post("/userlogin", function(req, res){
 });
 // ===============================END of login================================
 
+// =============================== LOG OUT ===================================
+router.get("/logout", function(req, res){
 
+  req.session.destroy();
+  res.render("");
+});
 
 
 module.exports = router;
