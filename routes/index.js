@@ -44,5 +44,9 @@ router.get("/keychain", function(req, res, next){
 })
 router.get("/view", function(req, res, next){
 	res.render('single');
-})
+});
+
+router.post("/usersignup", function(req, res, next){
+  console.log(req.body.username)
+});
 module.exports = router;
