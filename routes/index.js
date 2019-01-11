@@ -4,6 +4,8 @@ var monk = require('monk');  //get the monk javascript
 var moment = require('moment'); //get the moment data
 var dbs = monk('localhost:27017/3dclikx');
 var clikx = dbs.get("usersignin"); ///sign up data base
+var cutomeOrder = dbs.get("customeorder");  //custome order
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if(req.session.user)
@@ -225,6 +227,7 @@ router.post("/userlogin", function(req, res){
 });
 // ===============================END of login================================
 
+
 // =============================== LOG OUT ===================================
 router.get("/logout", function(req, res){
 
@@ -233,5 +236,13 @@ router.get("/logout", function(req, res){
   res.render("/custome");
 });
 
+// ==============================LOG END======================================
 
+
+// ==============================custome input================================
+router.post("/customepost", function(req, res){
+
+  consloe.log("data");
+});
+// ==============================custome end  ================================
 module.exports = router;
