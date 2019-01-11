@@ -42,11 +42,7 @@ router.get("/custome", function(req, res, next){
   if(req.session.user)
   {
     console.log(req.session.user);
-	  res.render('custome',
-              { 
-                useremail: 'airrakesh@hotmail.com'
-              }
-              );
+	  res.render('custome',{ useremail : 'airrakesh@hotmail.com'});
 
   }
   else
