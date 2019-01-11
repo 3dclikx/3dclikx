@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
+var session=require('client-sessions');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -43,4 +45,13 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// session 
+app.use(session({
+  cookieName: 'session',
+  secret: 'eg[isfd-8yF9-7w2315df{}+Ijsli;;to8',
+  duration: 600 * 60 * 1000,
+  httpOnly: true,
+  secure: true,
+  ephemeral: true
+}));
 module.exports = app;
