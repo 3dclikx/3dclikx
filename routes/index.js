@@ -93,7 +93,7 @@ router.post("/userlogin", function(req, res){
     userpassword : req.body.loginPassword
   }
   clikx.findOne(data, function(err, doc){
-    if(!doc){
+    if(doc){
       res.send("<html><script>alert('Email or password is wrong'); location.href='index';</script></html>");
     }
     else
@@ -103,4 +103,5 @@ router.post("/userlogin", function(req, res){
   });
 
 });
+// ===============================END of login================================
 module.exports = router;
