@@ -39,7 +39,16 @@ router.get('/single', function(req, res, next) {
   res.render('single');
 });
 router.get("/custome", function(req, res, next){
-	res.render('custome');
+  if(!req.session.user)
+  {
+
+	  res.render('custome');
+  }
+  else
+  {
+    res.send("<html><script>alert('please login First'); location.href='index';</script></html>");
+  }
+
 })
 router.get("/keychain", function(req, res, next){
 	res.render('keychain');
@@ -100,7 +109,7 @@ router.post("/userlogin", function(req, res){
     {
       delete doc.password;
       req.session.user = doc;
-      
+
       res.send("<html><script>alert('You are signed in ');location.href='index';</script></html>");
     }
   });
