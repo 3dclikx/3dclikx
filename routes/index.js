@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var monk = require('monk');  //get the monk javascript
 var moment = require('moment'); //get the moment data
+var dbs = monk('localhost:27017/3dclikx');
+var clikx = dbs.get("usersignin"); ///sign up data base
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -46,7 +48,59 @@ router.get("/view", function(req, res, next){
 	res.render('single');
 });
 
+
+
+//Signup part from to register the image
 router.post("/usersignup", function(req, res, next){
-  console.log(req.body.username)
+  var data={
+    username: req.body.username,
+    useremail: req.body.userEmail,
+    userAddress: req.body.useraddress,
+    userpasswrod: req.body.password,
+    status : '0'
+  }
+  clikx.findOne({username : req.body.username}, function(err, doc){
+  if(err)
+  {
+    throw err;
+  }
+  else if(!doc)
+  {
+      clikx.insert(data, function(err, doc){
+      if(!doc){
+        res.render('index');
+      }
+      else
+      {
+        res.send("<html><script>alert('Thank you! For your Registration'); location.href='index';</script></html>");
+      }
+    });
+  }
+  else
+  {
+    res.send("<html><script>alert('Your are already registered'); location.href='index';</script></html>");
+  }
+  });
+});
+// =================== END OF SIGNUP ===========================
+
+
+
+// ====================USER LOGIN PART STARTED =================
+router.post("/userlogin", function(req, res){
+  var data = {
+    useremail : req.body.loginemail,
+    userpassword : req.body.loginPassword
+  }
+  clikx.findOne(data, function(err, doc){
+    if(!doc){
+      res.send("<html><script>alert('Email or password is wrong'); location.href='index';</script></html>");
+    }
+    else
+    {
+      res.send("<html><script>alert('You are signed in ');location.href='index';</script></html>");
+    }
+  });
+
 });
 module.exports = router;
