@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var monk = require('monk');  //get the monk javascript
+var moment = require('moment'); //get the moment data
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -39,5 +41,8 @@ router.get("/custome", function(req, res, next){
 })
 router.get("/keychain", function(req, res, next){
 	res.render('keychain');
+})
+router.get("/view", function(req, res, next){
+	res.render('single');
 })
 module.exports = router;
