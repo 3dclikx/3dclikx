@@ -6,52 +6,144 @@ var dbs = monk('localhost:27017/3dclikx');
 var clikx = dbs.get("usersignin"); ///sign up data base
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  if(req.session.user)
+  {
+    console.log(req.session.error);
+     return res.render('index',{ user : req.session.user, error:req.session.error, success:req.session.success });
+      req.session.error = null;
+  }
+  else
+  {
+    
+    res.render('index', {error:req.session.error});
+  }
+  
 });
 router.get('/index', function(req, res, next) {
-  res.render('index');
+  if(req.session.user)
+  {
+    return res.render('index',{ user : req.session.user, error:req.session.error, success:req.session.success });
+    req.session.error = null;
+  }
+  else
+  {
+    res.render('index');
+  }
+  
 });
 router.get('/3dproduct', function(req, res, next) {
-  res.render('product');
+  if(req.session.user)
+  {
+    return res.render('product',{ user : req.session.user, error:req.session.error, success:req.session.success });
+    req.session.error = null;
+  }
+  else
+  {
+    res.render('product');
+  }
+  
 });
 router.get('/robotics', function(req, res, next) {
-  res.render('product2');
+  if(req.session.user)
+  {
+    return res.render('product2',{ user : req.session.user, error:req.session.error, success:req.session.success });
+    req.session.error = null;
+  }
+  else
+  {
+    res.render('product2');
+  }
+  
 });
 router.get('/about', function(req, res, next) {
-  res.render('about');
+  if(req.session.user)
+  {
+    return res.render('about',{ user : req.session.user, error:req.session.error, success:req.session.success });
+    req.session.error = null;
+  }
+  else
+  {
+    res.render('about');
+  }
+  
 });
 router.get('/contact', function(req, res, next) {
-  res.render('contact');
+  if(req.session.user)
+  {
+    return res.render('contact',{ user : req.session.user, error:req.session.error, success:req.session.success });
+    req.session.error = null;
+  }
+  else
+  {
+    res.render('contact');
+  }
+  
 });
 router.get('/help', function(req, res, next) {
-  res.render('help');
+  if(req.session.user)
+  {
+    return res.render('help',{ user : req.session.user, error:req.session.error, success:req.session.success });
+    req.session.error = null;
+  }
+  else
+  {
+    res.render('help');
+  }
+  
 });
 router.get('/terms', function(req, res, next) {
-  res.render('terms');
+  if(req.session.user)
+  {
+    return res.render('terms',{ user : req.session.user, error:req.session.error, success:req.session.success });
+    req.session.error = null;
+  }
+  else
+  {
+    res.render('terms');
+  }
+  
 });
 router.get('/faqs', function(req, res, next) {
-  res.render('faqs');
+  if(req.session.user)
+  {
+    return res.render('faqs',{ user : req.session.user, error:req.session.error, success:req.session.success });
+    req.session.error = null;
+  }
+  else
+  {
+    res.render('faqs');
+  }
+  
 });
 router.get('/privacy', function(req, res, next) {
-  res.render('privacy');
+  if(req.session.user)
+  {
+    return res.render('privacy',{ user : req.session.user, error:req.session.error, success:req.session.success });
+    req.session.error = null;
+  }
+  else
+  {
+    res.render('privacy');
+  }
+  
 });
 router.get('/single', function(req, res, next) {
   if(req.session.user)
   {
-    console.log(req.session.user);
-    res.render('si',{ useremail : 'airrakesh@hotmail.com'});
-
+    return res.render('custome',{ user : req.session.user, error:req.session.error, success:req.session.success });
+    req.session.error = null;
   }
   else
   {
     res.render('single');
   }
+ 
   
 });
 router.get("/custome", function(req, res, next){
   if(req.session.user)
   {
-    console.log(req.session.user);
+    
 	  return res.render('custome',{ user : req.session.user, error:req.session.error, success:req.session.success });
     req.session.error = null;
   }
@@ -115,7 +207,7 @@ router.post("/userlogin", function(req, res){
   }
   clikx.findOne(data, function(err, doc){
     if(!doc){
-      var error = err
+      var error = err;
       req.session.error = error;
       req.session.success = false;
       res.send("<html><script>alert('Email or password is wrong'); location.href='index';</script></html>");
@@ -124,6 +216,7 @@ router.post("/userlogin", function(req, res){
     {
       delete doc.userpasswrod;
       req.session.user = doc;
+      req.session.error=null;
       req.session.success = true;
       res.send("<html><script>alert('You are signed in ');location.href='index';</script></html>");
     }
@@ -136,7 +229,8 @@ router.post("/userlogin", function(req, res){
 router.get("/logout", function(req, res){
 
   req.session.destroy();
-  res.render("");
+  // req.session.session = false;
+  res.render("/custome");
 });
 
 
