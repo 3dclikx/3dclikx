@@ -90,18 +90,25 @@ router.post("/usersignup", function(req, res, next){
 router.post("/userlogin", function(req, res){
   var data = {
     useremail : req.body.loginemail,
-    userpassword : req.body.loginPassword
+    userpasswrod : req.body.loginPassword
   }
   clikx.findOne(data, function(err, doc){
-    if(doc){
+    if(!doc){
       res.send("<html><script>alert('Email or password is wrong'); location.href='index';</script></html>");
     }
     else
     {
+      delete doc.password;
+      req.session.user = doc;
+      
       res.send("<html><script>alert('You are signed in ');location.href='index';</script></html>");
     }
   });
 
 });
 // ===============================END of login================================
+
+
+
+
 module.exports = router;
