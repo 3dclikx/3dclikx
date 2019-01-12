@@ -243,7 +243,15 @@ router.get("/logout", function(req, res){
 // ==============================custome input================================
 router.post("/customepost", function(req, res){
 
-  consloe.log("datan nmbn hnbjhbhkj iuiohiojiojiojiojioh");
+  var data = {
+    customename : req.body.customename,
+    customeEmail : req.body.customeEmail,
+    filename : req.file.originalname,
+    msg : req.body.Message
+  }
+  console.log(data);
+  
+  console.log(data);
 });
 // ==============================custome end  ================================
 module.exports = router;
