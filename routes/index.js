@@ -7,7 +7,8 @@ var clikx = dbs.get("usersignin"); ///sign up data base
 var cutomeOrder = dbs.get("customeorder");  //custome order
 var email   = require('emailjs/email');
 var nodemailer = require('nodemailer');    // email package for sending email
-var multer = require('express-fileupload');    // multipart request taking by the server
+//var upload = require('express-fileupload');    // multipart request taking by the servervar 
+var multer = require('multer');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if(req.session.user)
@@ -219,6 +220,7 @@ router.post("/userlogin", function(req, res){
     else
     {
       delete doc.userpasswrod;
+      delete doc._id;
       req.session.user = doc;
       req.session.error=null;
       req.session.success = true;
@@ -243,16 +245,24 @@ router.get("/logout", function(req, res){
 
 
 // ==============================custome input================================
-router.post("/customepost", function(req, res){
-
+var upload = multer({ dest: 'uploads/' })
+router.post('/customepost', upload.single('originalname'), function (req, res, next) {
   var data = {
-    customename : req.body.customename,
-    customeEmail : req.body.customeEmail,
-    filename : req.file.originalname,
-    msg : req.body.Message
+      customename : req.body.customename,
+      customeEmail : req.body.customeEmail,
+      originalname : req.file.originalname,
+      Message : req.body.Message,
+      userData : req.session.user  
   }
-  console.log(data);
-  
+
+  cutomeOrder.insert(data, function(err, doc){
+    if(doc){
+      res.send("<html><script>alert('Thank you for order we will get touch you soon ');location.href='index';</script></html>");
+    }
+    else{
+      res.send("<html><script>alert(' Something went wrong.<br> please Try again ');location.href='index';</script></html>");
+    }
+  });
   console.log(data);
 });
 // ==============================custome end  ================================
