@@ -45,7 +45,6 @@
 	<!-- //web fonts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
-</head>
 
 <body>
 	<!-- top-header -->
@@ -131,7 +130,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="userlogin" method="post">
+					<form action="userlogin" method="post" id="loginform">
 						<div class="form-group">
 							<label class="col-form-label">Username</label>
 							<input type="email" class="form-control" placeholder=" " name="loginemail" required="">
@@ -150,9 +149,24 @@
 							</div>
 						</div>
 						<p class="text-center dont-do mt-3">Don't have an account?
-							<a href="#" data-toggle="modal" data-target="#exampleModal2">
+							<a href="#" data-toggle="modal"  data-target="#exampleModal2">
 								Register Now</a>
 						</p>
+						<p class="text-center dont-do mt-3">Forgot password?
+							<a href="#" onclick="forgotfun()">
+								Clike Here</a>
+						</p>
+					</form>
+					<form action="" method="post" id ="forgotform"  hidden="" >
+						<div class="form-group">
+							<label class="col-form-label">Your registered email</label>
+							<input type="text" class="form-control" placeholder=" " name="username" required="" id="username">
+						</div>
+						
+						<div class="right-w3l">
+							<input type="submit" class="form-control" value="Register">
+						</div>
+						
 					</form>
 				</div>
 			</div>
@@ -205,6 +219,7 @@
 			</div>
 		</div>
 	</div>
+
 	<!-- //modal -->
 	<!-- //top-header -->
 
@@ -1216,6 +1231,15 @@
 				});
 
 			}
+		}
+	</script>
+	<script type="text/javascript">
+		function forgotfun()
+		{
+			
+			
+			$("#loginform").hide();
+			$("#forgotform").show();
 		}
 	</script>
 </body>

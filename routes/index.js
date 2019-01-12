@@ -266,4 +266,10 @@ router.post('/customepost', upload.single('originalname'), function (req, res, n
   console.log(data);
 });
 // ==============================custome end  ================================
+
+
+
+// ==============================Fogot password ===============================
+
+
 module.exports = router;
