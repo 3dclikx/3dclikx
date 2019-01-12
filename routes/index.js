@@ -5,7 +5,9 @@ var moment = require('moment'); //get the moment data
 var dbs = monk('localhost:27017/3dclikx');
 var clikx = dbs.get("usersignin"); ///sign up data base
 var cutomeOrder = dbs.get("customeorder");  //custome order
-
+var email   = require('emailjs/email');
+var nodemailer = require('nodemailer');    // email package for sending email
+var multer = require('express-fileupload');    // multipart request taking by the server
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if(req.session.user)
