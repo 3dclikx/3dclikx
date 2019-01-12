@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
   else
   {
     
-    res.render('index', {error:req.session.error});
+   return res.render('index', {user : req.session.user});
   }
   
 });
@@ -29,7 +29,7 @@ router.get('/index', function(req, res, next) {
   }
   else
   {
-    res.render('index');
+    return res.render('index', {user : req.session.user});
   }
   
 });
@@ -232,8 +232,9 @@ router.post("/userlogin", function(req, res){
 router.get("/logout", function(req, res){
 
   req.session.destroy();
-  // req.session.session = false;
-  res.render("/custome");
+  req.session.user = false;
+  return res.redirect("..");
+
 });
 
 // ==============================LOG END======================================

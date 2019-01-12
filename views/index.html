@@ -73,21 +73,23 @@
 							<i class="fas fa-phone mr-2"></i> 70 13 90 4803
 						</li>
 						<li class="text-center border-right text-white">
-							<% if (error) { %>
+							<% if (user) { %>
+								<a href="#" class="text-white">
+								<i class="fas fa-user mr-2"></i><%= user.username %> </a>
+							<% } else {%>
+							
 								<a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white">
 								<i class="fas fa-sign-in-alt mr-2"></i> Log In </a>
-							<% } else { %>
-							<a href="#" class="text-white">
-								<i class="fas fa-user mr-2"></i>  <%= user.username %>  </a>
 							<% } %>
 						</li>
 						<li class="text-center text-white">
-							<% if (error) { %>
+							<% if (user) { %>
+								<a href="/logout" class="text-white">
+								<i class="fas fa-sign-out-alt mr-2"></i> Logout </a>
+							<% } else {%>
+							
 							<a href="#" data-toggle="modal" data-target="#exampleModal2" class="text-white">
 								<i class="fas fa-sign-out-alt mr-2"></i>Register </a>
-							<% } else { %>
-							<a href="/logout" class="text-white">
-								<i class="fas fa-sign-out-alt mr-2"></i> Logout </a>
 							<% } %>
 						</li>
 						
@@ -103,13 +105,15 @@
 		<div class="select-city">
 			<h3>
 				<i class="fas fa-map-marker"></i> Please Select Your Location</h3>
-			<select class="list_of_cities">
+			<select class="list_of_cities" onchange="selectCity()" id="selectCity">
 				<optgroup label="Popular Cities">
-					<option selected style="display:none;color:#eee;">Select City</option>
-					<option>Kakinada</option>
-					<option>Rajmundry</option>
+					<option selected style="display:none;color:#eee;" value="">Select City</option>
+					<option value="Kakinada">Kakinada</option>
+					<option value="Rajmundry">Rajmundry</option>
 				</optgroup>
 			</select>
+			<br>
+			<input type="button" value=" OK " class="btn btn-success">
 			<div class="clearfix"></div>
 		</div>
 	</div>
@@ -1195,6 +1199,25 @@
 	<script src="js/bootstrap.js"></script>
 	<!-- //for bootstrap working -->
 	<!-- //js-files -->
+	<script type="text/javascript">
+		function selectCity()
+		{
+			var city = $("#selectCity").val();
+			if(city !== "")
+			{
+				$.ajax({
+					type : 'post',
+					url : "/selectcity",
+					data :{ "city" : city},
+					success : function(data)
+					{
+						alert("done");
+					}
+				});
+
+			}
+		}
+	</script>
 </body>
 
 </html>
