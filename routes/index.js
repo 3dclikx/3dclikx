@@ -242,7 +242,7 @@ router.get("/logout", function(req, res){
 // ==============================custome input================================
 router.post("/customepost", function(req, res){
 
-  consloe.log("data");
+  consloe.log("datan nmbn hnbjhbhkj iuiohiojiojiojiojioh");
 });
 // ==============================custome end  ================================
 module.exports = router;
