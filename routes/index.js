@@ -267,7 +267,9 @@ router.post('/customepost', upload.single('originalname'), function (req, res, n
 });
 // ==============================custome end  ================================
 
-
+router.post("/forgotpassword", function(req, res){
+  console.log(req.body.email);
+});
 
 // ==============================Fogot password ===============================
 

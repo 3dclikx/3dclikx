@@ -157,16 +157,19 @@
 								Clike Here</a>
 						</p>
 					</form>
-					<form action="" method="post" id ="forgotform"  hidden="" >
+					<form id ="forgotform" style="display: none;" >
 						<div class="form-group">
 							<label class="col-form-label">Your registered email</label>
-							<input type="text" class="form-control" placeholder=" " name="username" required="" id="username">
+							<input type="email" id = "forgotemail" class="form-control" placeholder=" " name="username" required="" id="username">
 						</div>
 						
 						<div class="right-w3l">
-							<input type="submit" class="form-control" value="Register">
+							<input type="submit" id = "registerBtn" class="form-control" value="Register">
 						</div>
-						
+						<p class="text-left dont-do mt-1">
+							<a href="#" onclick="ShowLogin()">
+								Go Back</a>
+						</p>
 					</form>
 				</div>
 			</div>
@@ -1239,8 +1242,30 @@
 			
 			
 			$("#loginform").hide();
-			$("#forgotform").show();
+			$("#forgotform").fadeIn();
 		}
+
+		function ShowLogin()
+		{
+			$("#forgotform").fadeOut();
+			$("#loginform").show();
+			
+		}
+
+		$("#registerBtn").click(function(){
+			var email = $("#forgotemail").val();
+			if(email !== "")
+			{
+				$.ajax({
+					type : "post",
+					url : "forgotpassword",
+					data : { "email" : email },
+					success : function(data){
+						
+					}
+				});
+			}
+		});
 	</script>
 </body>
 
