@@ -135,7 +135,7 @@ router.get('/privacy', function(req, res, next) {
 router.get('/single', function(req, res, next) {
   if(req.session.user)
   {
-    return res.render('custome',{ user : req.session.user, error:req.session.error, success:req.session.success });
+    return res.render('single',{ user : req.session.user, error:req.session.error, success:req.session.success });
     req.session.error = null;
   }
   else
@@ -272,4 +272,5 @@ router.post('/customepost', upload.single('originalname'), function (req, res, n
 // ==============================Fogot password ===============================
 
 
+// ==============================End Password =================================
 module.exports = router;
