@@ -41,7 +41,7 @@ router.get('/3dproduct', function(req, res, next) {
   }
   else
   {
-    res.render('product');
+    return res.render('product', {user : req.session.user});
   }
   
 });
@@ -53,7 +53,7 @@ router.get('/robotics', function(req, res, next) {
   }
   else
   {
-    res.render('product2');
+    return res.render('product2', {user : req.session.user});
   }
   
 });
@@ -65,7 +65,7 @@ router.get('/about', function(req, res, next) {
   }
   else
   {
-    res.render('about');
+    return res.render('about', {user : req.session.user});
   }
   
 });
@@ -77,7 +77,7 @@ router.get('/contact', function(req, res, next) {
   }
   else
   {
-    res.render('contact');
+    return res.render('contact', {user : req.session.user});
   }
   
 });
@@ -89,7 +89,7 @@ router.get('/help', function(req, res, next) {
   }
   else
   {
-    res.render('help');
+    return res.render('help', {user : req.session.user});
   }
   
 });
@@ -101,7 +101,7 @@ router.get('/terms', function(req, res, next) {
   }
   else
   {
-    res.render('terms');
+    return res.render('terms', {user : req.session.user});
   }
   
 });
@@ -113,7 +113,7 @@ router.get('/faqs', function(req, res, next) {
   }
   else
   {
-    res.render('faqs');
+    return res.render('faqs', {user : req.session.user});
   }
   
 });
@@ -125,7 +125,7 @@ router.get('/privacy', function(req, res, next) {
   }
   else
   {
-    res.render('privacy');
+    return res.render('privacy', {user : req.session.user});
   }
   
 });
@@ -137,7 +137,7 @@ router.get('/single', function(req, res, next) {
   }
   else
   {
-    res.render('single');
+    return res.render('single', {user : req.session.user});
   }
  
   
@@ -157,10 +157,10 @@ router.get("/custome", function(req, res, next){
 
 })
 router.get("/keychain", function(req, res, next){
-	res.render('keychain');
+	res.render('keychain', {user : req.session.user});
 })
 router.get("/view", function(req, res, next){
-	res.render('single');
+	res.render('single', {user : req.session.user});
 });
 
 
